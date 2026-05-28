@@ -1,0 +1,308 @@
+## Overview
+
+This project documents the creation of a virtualized IT help desk lab environment using VirtualBox, Windows Server 2022, and Windows 11 machines.
+
+The lab simulates a small organizational network environment with:
+- Active Directory
+- Domain-joined workstations
+- Static IP configuration
+- User management
+- Remote administration
+- Help desk troubleshooting scenarios
+
+The purpose of this project is to gain hands-on experience with common IT support and system administration tasks.
+
+---
+
+## Lab Environment
+
+| Device | Role | IP Address |
+|---|---|---|
+| CA-DC-01 | Domain Controller | 192.168.10.10 |
+| desktop01 | Windows 11 Client | 192.168.10.20 |
+| desktop02 | Windows 11 Client | 192.168.10.21 |
+
+---
+
+## Technologies Used
+
+- VirtualBox
+- Windows Server 2022
+- Windows 11 Pro
+- Active Directory
+- Windows Defender Firewall
+- Remote Desktop Protocol (RDP)
+
+---
+
+## Install VirtualBox and Windows Server 2022
+
+- Install VirtualBox on computer
+- Download Microsoft Windows Server 2022 ISO
+- Create VM in VirtualBox
+  - `new > (name it CA-DC-01) > select windows server 2022 > finish`
+  - `right click VM > settings > configure CPU, memory, etc. > finish`
+  - `settings > network`
+    - `adapter 1 > internal network > LABNET`
+    - `adapter 2 > NAT`
+  - `start VM > select downloaded ISO file`
+
+---
+
+## Configure CA-DC-01 Static IP
+
+- On server:
+  - `Windows + R > ncpa.cpl`
+  - `right click internal adapter > properties`
+  - `internet protocol version 4 (TCP/IPv4)`
+
+- Configure:
+  - `IP Address: 192.168.10.10`
+  - `Subnet Mask: 255.255.255.0`
+  - `Default Gateway: leave blank`
+  - `Preferred DNS: 192.168.10.10`
+
+---
+
+## Install Active Directory on Server
+
+- Rename server:
+  - `this pc > properties > rename this pc`
+  - `rename to: CA-DC-01`
+
+- Install AD:
+  - `server manager > manage > add roles and features`
+  - `select active directory domain services`
+  - `install`
+  - `promote this server to a domain controller`
+  - `add a new forest`
+  - `create domain name`
+  - `complete installation and restart`
+
+---
+
+## Install Guest Additions and Shared Folder
+
+- On VirtualBox:
+  - `devices > insert guest additions CD image`
+
+- Set up shared folder:
+  - `devices > shared folders`
+
+- On server VM:
+  - `open file explorer`
+  - `eject VirtualBox drive`
+  - `shared folder now accessible between host and VM`
+
+---
+
+## Explore Active Directory
+
+- Open:
+  - `server manager > tools > active directory users and computers`
+
+- Create new user:
+  - `expand domain > users`
+  - `right click > new > user`
+
+- Reset password:
+  - `right click user > reset password`
+
+- View user info in CMD:
+```cmd
+net user tom /domain
+```
+
+---
+
+## Set Up Windows 11 Machine
+
+- Download Windows 11 ISO
+- Create VM in VirtualBox
+  - `new > (name it desktop01) > select windows 11 > finish`
+  - `right click VM > settings`
+    - `system > enable EFI`
+    - `security > enable TPM`
+    - `display > set video memory to 128 MB`
+    - `configure CPU and memory`
+  - `settings > network`
+    - `adapter 1 > internal network > LABNET`
+    - `adapter 2 > NAT`
+
+- Start VM
+  - `select downloaded Windows 11 ISO`
+
+---
+
+## Install Windows 11 Pro
+
+- Select:
+  - `windows 11 pro`
+
+- Choose:
+  - `I don't have a product key`
+
+- At network screen:
+  - `Shift + F10`
+
+- Type:
+```cmd
+OOBE\BYPASSNRO
+```
+
+- Press Enter
+- Wait for reboot
+
+- Select:
+  - `I don't have internet`
+  - `continue with limited setup`
+
+- Create local admin account:
+  - `labadmin`
+
+---
+
+## Configure desktop01 Static IP
+
+- On desktop01:
+  - `Windows + R > ncpa.cpl`
+  - `right click internal adapter > properties`
+  - `internet protocol version 4 (TCP/IPv4)`
+
+- Configure:
+  - `IP Address: 192.168.10.20`
+  - `Subnet Mask: 255.255.255.0`
+  - `Default Gateway: leave blank`
+  - `Preferred DNS: 192.168.10.10`
+
+---
+
+## Clone Windows 11 Machine
+
+- Shut down desktop01
+- Right click VM:
+  - `clone`
+  - `full clone`
+  - `name: desktop02`
+
+- Open:
+  - `settings > network`
+    - `adapter 1 > internal network > LABNET`
+    - `adapter 2 > NAT`
+
+---
+
+## Configure desktop02 Static IP
+
+- On desktop02:
+  - `Windows + R > ncpa.cpl`
+  - `right click internal adapter > properties`
+  - `internet protocol version 4 (TCP/IPv4)`
+
+- Configure:
+  - `IP Address: 192.168.10.21`
+  - `Subnet Mask: 255.255.255.0`
+  - `Default Gateway: leave blank`
+  - `Preferred DNS: 192.168.10.10`
+
+---
+
+## Rename Windows Machines
+
+- On desktop01:
+  - `Windows + R > sysdm.cpl`
+  - `rename to desktop01`
+
+- On desktop02:
+  - `Windows + R > sysdm.cpl`
+  - `rename to desktop02`
+
+- Restart both VMs
+
+---
+
+## Enable Ping Through Windows Firewall on Windows 11 Machines
+
+- Perform steps on:
+  - `desktop01`
+  - `desktop02`
+
+- Open Windows Firewall:
+  - `Windows + R > wf.msc`
+
+- Navigate:
+  - `Inbound Rules`
+
+- Locate:
+  - `File and Printer Sharing (Echo Request - ICMPv4-In)`
+
+- Enable:
+  - `Private`
+  - `Domain`
+
+- Right click each rule:
+  - `Enable Rule`
+
+- Verify network profile:
+  - `Settings > Network & Internet > Ethernet`
+  - `ensure internal adapter is set to Private`
+
+---
+
+## Test Network Connectivity
+
+- On desktop01:
+```cmd
+ping 192.168.10.10
+```
+
+- On desktop02:
+```cmd
+ping 192.168.10.10
+```
+
+- Test desktop01 to desktop02:
+```cmd
+ping 192.168.10.21
+```
+
+---
+
+## Onboard desktop01 Machine onto Domain
+
+- Open:
+  - `this pc > properties`
+  - `system > about`
+
+- Navigate to:
+  - `Domain or Workgroup`
+
+- Change to domain:
+  - `woodtech`
+
+- Restart machine
+
+- Users created in Active Directory can now log into:
+  - `desktop01`
+
+- RDP can also be enabled to remotely connect to:
+  - `CA-DC-01`
+
+---
+
+## Skills Demonstrated
+
+- Virtual machine deployment
+- Active Directory installation
+- Static IP configuration
+- Windows networking
+- Domain onboarding
+- Windows administration
+- Firewall configuration
+- Troubleshooting connectivity issues
+- User account management
+- Remote desktop configuration
+- VirtualBox networking
+- Help desk troubleshooting
+- Basic system administration
+```
