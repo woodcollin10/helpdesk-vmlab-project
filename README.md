@@ -20,6 +20,7 @@ This repository will continue to expand with additional help desk scenarios, tro
 
 Active Directory Management
 This phase of the project focused on organizing Active Directory to simulate a real-world enterprise environment. Organizational Units (OUs), users, security groups, and workstation objects were structured to support future onboarding, offboarding, access management, and help desk workflows.
+
 Tom Assigned to Sales Department
 Tom was moved into the Sales Organizational Unit to align with departmental user management practices and role-based administration.
 
@@ -40,7 +41,7 @@ Domain-joined workstations were moved into a dedicated Workstations Organization
 
 <img width="1259" height="883" alt="Workstations in Domain" src="https://github.com/user-attachments/assets/f0bd351d-7de3-4dcf-ae8b-7a8f4a7ba7d5" />
 
-Skills Demonstrated
+Skills Demonstrated:
 Active Directory Administration
 Organizational Unit (OU) Management
 User Account Administration
@@ -49,3 +50,5 @@ Domain Management
 Identity and Access Management (IAM)
 Workstation Organization
 Enterprise Directory Structure Design
+
+---
