@@ -1,0 +1,214 @@
+# Active Directory Management
+
+## Overview
+
+This phase of the project focused on organizing Active Directory to better simulate a real-world enterprise environment. Organizational Units (OUs), security groups, user accounts, and workstation objects were organized to support future onboarding, offboarding, permissions management, and help desk ticket workflows.
+
+---
+
+## Create WoodTech Organizational Unit (OU)
+
+- Log into `CA-DC-01`
+- Open:
+  - Server Manager
+  - Tools
+  - Active Directory Users and Computers
+- Right click the domain
+- Select:
+  - New
+  - Organizational Unit
+- Create:
+  - WoodTech
+
+---
+
+## Create Department OUs
+
+Under the WoodTech OU, create the following Organizational Units:
+
+- Sales
+- HR
+- IT
+- Workstations
+
+Resulting structure:
+
+```text
+WoodTech
+├── Sales
+├── HR
+├── IT
+└── Workstations
+```
+
+---
+
+## Move Existing Users into Department OUs
+
+### Move Tom
+
+- Navigate to:
+  - Users
+- Locate:
+  - Tom
+- Right click:
+  - Move
+- Select:
+  - WoodTech > Sales
+
+### Move Bob
+
+- Navigate to:
+  - Users
+- Locate:
+  - Bob
+- Right click:
+  - Move
+- Select:
+  - WoodTech > HR
+
+---
+
+## Create Help Desk Administrator Account
+
+Navigate to:
+
+```text
+WoodTech > IT
+```
+
+Create a new user:
+
+| Field | Value |
+|---------|---------|
+| First Name | HelpDesk |
+| Last Name | Admin |
+| Username | helpdesk.admin |
+
+Password Configuration:
+
+- Set password
+- Uncheck:
+  - User must change password at next logon
+- Check:
+  - Password never expires
+
+Purpose:
+
+- Dedicated technician account
+- Used to manage tickets
+- Used for user administration tasks
+- Used for troubleshooting activities
+
+---
+
+## Create IT_Admins Security Group
+
+Navigate to:
+
+```text
+WoodTech > IT
+```
+
+Create a new group:
+
+| Setting | Value |
+|-----------|-----------|
+| Group Name | IT_Admins |
+| Group Scope | Global |
+| Group Type | Security |
+
+---
+
+## Add HelpDesk.Admin to IT_Admins
+
+- Open:
+  - IT_Admins
+- Select:
+  - Members
+- Click:
+  - Add
+- Enter:
+  - helpdesk.admin
+- Select:
+  - Check Names
+- Click:
+  - OK
+
+![Create HelpDesk.Admin User]
+
+---
+
+## Move Workstations into Workstations OU
+
+Navigate to:
+
+```text
+Computers
+```
+
+Move:
+
+- desktop01
+- desktop02
+
+To:
+
+```text
+WoodTech > Workstations
+```
+
+---
+
+## Verify Active Directory Structure
+
+Final structure:
+
+```text
+WoodTech
+├── Sales
+│   └── Tom
+│
+├── HR
+│   └── Bob
+│
+├── IT
+│   ├── HelpDesk.Admin
+│   └── IT_Admins
+│
+└── Workstations
+    ├── desktop01
+    └── desktop02
+```
+
+---
+
+## Verify Domain Login
+
+On either workstation:
+
+- Sign out
+- Select:
+  - Other User
+
+Login with:
+
+```text
+WOODTECH\helpdesk.admin
+```
+
+Verify successful authentication.
+
+---
+
+## Skills Demonstrated
+
+- Active Directory administration
+- Organizational Unit (OU) management
+- User account management
+- Security group administration
+- Domain authentication
+- Workstation organization
+- Identity and Access Management (IAM)
+- Help desk account provisioning
+- Enterprise directory structure design
