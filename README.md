@@ -19,7 +19,7 @@ This repository will continue to expand with additional help desk scenarios, tro
 ---
 
 # Active Directory Management
-- This phase of the project focused on organizing Active Directory to simulate a real-world enterprise environment. Organizational Units (OUs), users, security groups, and workstation objects were structured to support future onboarding, offboarding, access management, and help desk workflows.
+This phase of the project focused on organizing Active Directory to simulate a real-world enterprise environment. Organizational Units (OUs), users, security groups, and workstation objects were structured to support future onboarding, offboarding, access management, and help desk workflows.
 
 Tom Assigned to Sales Department
 - Tom was moved into the Sales Organizational Unit to align with departmental user management practices and role-based administration.
