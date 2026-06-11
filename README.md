@@ -180,7 +180,10 @@ Successfully deployed a fully functional osTicket help desk platform capable of:
 
 ---
 
+<img width="1670" height="1020" alt="osTicket Confirmation" src="https://github.com/user-attachments/assets/9f30338b-d182-4ae0-a779-b17e08346d4f" />
 
+
+<img width="1675" height="1015" alt="osTicket Page" src="https://github.com/user-attachments/assets/9a7223a1-4193-4723-ab57-6b2c91938400" />
 
 ---
 
