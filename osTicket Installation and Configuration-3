@@ -1,0 +1,276 @@
+# osTicket Installation and Configuration
+
+## Overview
+
+This phase of the project focused on deploying osTicket within the Windows Server environment. The deployment required configuring IIS, PHP, MySQL, URL Rewrite, file permissions, and database connectivity before completing the installation.
+
+---
+
+## Install MySQL Server
+
+* Download:
+
+  * MySQL Community Installer
+* Run installer
+* Select:
+
+  * MySQL Server
+* Configure:
+
+  * Networking settings
+  * Authentication method
+* Create:
+
+  * Root password
+* Complete installation
+
+---
+
+## Download Required Components
+
+Download:
+
+* osTicket v1.17.7
+* PHP 8.2 x64
+* IIS URL Rewrite Module 2.1
+
+---
+
+## Install URL Rewrite Module
+
+* Run:
+
+  * URL Rewrite Module installer
+* Complete installation
+* Open:
+
+  * IIS Manager
+* Verify:
+
+  * URL Rewrite appears in IIS Features View
+
+---
+
+## Configure PHP
+
+* Extract:
+
+  * PHP package
+* Create:
+
+  * PHP directory
+* Move PHP files into directory
+* Open:
+
+  * IIS Manager
+* Configure:
+
+  * FastCGI Settings
+* Add:
+
+  * PHP executable path
+* Create:
+
+  * PHP Handler Mapping
+* Restart:
+
+  * IIS
+
+---
+
+## Deploy osTicket Files
+
+* Extract:
+
+  * osTicket installation package
+
+* Open:
+
+  * upload folder
+
+* Copy:
+
+  * All contents
+
+* Create:
+
+  ```text
+  C:\inetpub\wwwroot\osTicket
+  ```
+
+* Paste files into:
+
+  * osTicket directory
+
+---
+
+## Troubleshoot IIS Errors
+
+### Resolve HTTP Error 403.14
+
+* Verify:
+
+  * osTicket files copied correctly
+* Confirm:
+
+  * index.php exists
+
+### Resolve HTTP Error 500.19
+
+* Install:
+
+  * URL Rewrite Module
+
+### Resolve HTTP Error 500.52
+
+* Verify:
+
+  * URL Rewrite installed successfully
+* Restart:
+
+  * IIS
+
+---
+
+## Enable Required PHP Extensions
+
+Open:
+
+```text
+php.ini
+```
+
+Enable:
+
+* mysqli
+* ctype
+* xml
+* dom
+* json
+* mbstring
+* iconv
+
+Save changes
+
+Restart:
+
+* IIS
+
+---
+
+## Configure FastCGI
+
+* Open:
+
+  * IIS Manager
+* Select:
+
+  * FastCGI Settings
+* Add:
+
+  * PHP executable
+* Apply configuration
+
+---
+
+## Create osTicket Configuration File
+
+Navigate to:
+
+```text
+C:\inetpub\wwwroot\osTicket\include
+```
+
+Copy:
+
+```text
+ost-sampleconfig.php
+```
+
+Rename copy to:
+
+```text
+ost-config.php
+```
+
+---
+
+## Configure File Permissions
+
+Open:
+
+* PowerShell as Administrator
+
+Run:
+
+```powershell
+icacls "C:\inetpub\wwwroot\osTicket\include\ost-config.php" /grant Everyone:F
+```
+
+Restart:
+
+```powershell
+iisreset
+```
+
+---
+
+## Complete osTicket Installation
+
+Browse to:
+
+```text
+http://localhost/osTicket/setup
+```
+
+Configure:
+
+* Help Desk Name
+* System Email
+* Administrator Account
+* Database Information
+
+Select:
+
+* Install Now
+
+---
+
+## Secure Configuration File
+
+Open:
+
+* PowerShell as Administrator
+
+Run:
+
+```powershell
+icacls "C:\inetpub\wwwroot\osTicket\include\ost-config.php" /reset
+```
+
+---
+
+## Verify Installation
+
+Browse to:
+
+```text
+http://localhost/osTicket
+```
+
+Verify:
+
+* User Portal loads successfully
+
+Browse to:
+
+```text
+http://localhost/osTicket/scp
+```
+
+Verify:
+
+* Staff Control Panel loads successfully
+* Administrator login functions correctly
+
+---
