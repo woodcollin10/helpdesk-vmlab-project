@@ -10,6 +10,7 @@ The goal of this lab is to simulate a small organizational IT environment while 
 - Networking
 - Domain management
 - Help desk troubleshooting
+- Ticket sytem creation
 - Ticket resolution workflows
 - User account management
 - Remote desktop support
