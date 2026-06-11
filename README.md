@@ -52,3 +52,138 @@ Skills Demonstrated:
 - Enterprise Directory Structure Design
 
 ---
+# osTicket Deployment Lab
+
+## Overview
+
+This project focused on deploying and configuring osTicket, an open-source help desk ticketing system, within a Windows Server 2022 lab environment. The deployment required configuring IIS, PHP, MySQL, URL Rewrite, FastCGI, file permissions, and database connectivity to create a functional ticket management platform.
+
+The objective was to simulate a real-world help desk deployment while developing practical experience with web server administration, application deployment, troubleshooting, and service configuration.
+
+---
+
+## Technologies Used
+
+- Windows Server 2022
+- Internet Information Services (IIS)
+- PHP 8.2
+- MySQL 8.0
+- osTicket v1.17.7
+- URL Rewrite Module 2.1
+- FastCGI
+- PowerShell
+- Oracle VirtualBox
+
+---
+
+## Project Objectives
+
+- Deploy a web-based help desk application
+- Configure IIS to support PHP applications
+- Install and configure MySQL database services
+- Configure URL Rewrite and FastCGI
+- Manage file permissions for web applications
+- Troubleshoot web server and database errors
+- Verify successful application deployment
+
+---
+
+## Deployment Process
+
+The deployment consisted of:
+
+1. Installing MySQL Server
+2. Installing PHP and required extensions
+3. Installing IIS URL Rewrite Module
+4. Configuring FastCGI within IIS
+5. Creating PHP Handler Mappings
+6. Deploying osTicket files to IIS web root
+7. Configuring required PHP modules
+8. Creating and securing the osTicket configuration file
+9. Connecting osTicket to the MySQL database
+10. Completing the osTicket installation wizard
+11. Verifying portal and administrative access
+
+---
+
+## Troubleshooting Performed
+
+During deployment, several issues were identified and resolved:
+
+### URL Rewrite Errors
+
+- Resolved HTTP 500.19 configuration errors
+- Resolved HTTP 500.52 URL Rewrite errors
+- Verified rewrite rules and web.config configuration
+
+### PHP Configuration
+
+- Installed missing PHP MySQLi extension
+- Configured PHP FastCGI integration
+- Validated PHP execution within IIS
+
+### File Permissions
+
+- Created ost-config.php from sample configuration
+- Granted temporary write permissions
+- Removed elevated permissions after installation
+
+### Database Connectivity
+
+- Verified MySQL service operation
+- Configured database credentials
+- Resolved MySQL authentication issues
+
+---
+
+## Skills Demonstrated
+
+### Windows Server Administration
+
+- IIS Management
+- Service Configuration
+- File System Permissions
+- PowerShell Administration
+
+### Web Application Deployment
+
+- PHP Configuration
+- FastCGI Configuration
+- URL Rewrite Configuration
+- Application Installation
+
+### Database Administration
+
+- MySQL Installation
+- Database Configuration
+- User Authentication
+- Connectivity Troubleshooting
+
+### Troubleshooting
+
+- Log Analysis
+- Error Identification
+- Root Cause Analysis
+- Service Validation
+
+---
+
+## Results
+
+Successfully deployed a fully functional osTicket help desk platform capable of:
+
+- Accepting support tickets
+- Managing administrative users
+- Hosting a customer support portal
+- Providing a staff management interface
+- Storing ticket information within a MySQL database
+
+---
+
+
+
+---
+
+## Key Takeaways
+
+This project provided hands-on experience deploying a production-style web application within a Windows Server environment. It strengthened skills in IIS administration, PHP configuration, MySQL management, troubleshooting complex application errors, and integrating multiple technologies to deliver a working business application.
