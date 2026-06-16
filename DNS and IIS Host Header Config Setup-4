@@ -1,0 +1,178 @@
+# Internal DNS and IIS Host Header Configuration
+
+## Overview
+
+This phase of the project focused on simplifying access to the osTicket platform by creating an internal DNS record and configuring an IIS website with a host header. This allowed users to access the help desk application using a friendly URL instead of navigating directly to the server IP address or appending `/osTicket` to the URL.
+
+---
+
+## Create DNS Host Record
+
+* Log into `CA-DC-01`
+
+* Open:
+
+  * Server Manager
+  * Tools
+  * DNS
+
+* Expand:
+
+  * Forward Lookup Zones
+  * `woodtech.local`
+
+* Right click:
+
+  * `woodtech.local`
+
+* Select:
+
+  * New Host (A or AAAA)
+
+* Configure:
+
+  * Name: `helpdesk`
+  * IP Address: `[CA-DC-01 IP Address]`
+
+* Select:
+
+  * Add Host
+
+* Select:
+
+  * OK
+
+* Verify:
+
+  * `helpdesk.woodtech.local` appears within the `woodtech.local` zone
+
+---
+
+## Verify DNS Resolution
+
+* Log into `desktop01`
+
+* Open:
+
+  * Command Prompt
+
+* Run:
+
+```powershell id="u4mjlwm"
+ping helpdesk.woodtech.local
+```
+
+* Verify:
+
+  * DNS resolves to the IP address of `CA-DC-01`
+
+---
+
+## Create IIS Website
+
+* Log into `CA-DC-01`
+
+* Open:
+
+  * Internet Information Services (IIS) Manager
+
+* Expand:
+
+  * Sites
+
+* Right click:
+
+  * Sites
+
+* Select:
+
+  * Add Website
+
+* Configure:
+
+  * Site Name: `HelpDesk`
+  * Physical Path: `C:\inetpub\wwwroot\osTicket`
+  * Type: `http`
+  * IP Address: `All Unassigned`
+  * Port: `80`
+  * Host Name: `helpdesk.woodtech.local`
+
+* Select:
+
+  * OK
+
+* If prompted:
+
+  * "There is already a site using port 80. Do you want to continue?"
+
+* Select:
+
+  * Yes
+
+---
+
+## Configure Default Web Site Binding
+
+* Expand:
+
+  * Sites
+
+* Right click:
+
+  * Default Web Site
+
+* Select:
+
+  * Edit Bindings
+
+* Select:
+
+  * `http`
+
+* Select:
+
+  * Edit
+
+* Configure:
+
+  * Host Name: `ca-dc-01.woodtech.local`
+
+* Select:
+
+  * OK
+
+* Select:
+
+  * Close
+
+---
+
+## Verify Website Access
+
+* Log into `desktop01`
+
+* Open:
+
+  * Web Browser
+
+* Navigate to:
+
+```text
+http://helpdesk.woodtech.local
+```
+
+* Verify:
+
+  * osTicket User Portal loads successfully
+
+* Navigate to:
+
+```text
+http://helpdesk.woodtech.local/scp
+```
+
+* Verify:
+
+  * osTicket Staff Control Panel loads successfully
+
+---
