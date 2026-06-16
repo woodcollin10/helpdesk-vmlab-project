@@ -194,3 +194,128 @@ Successfully deployed a fully functional osTicket help desk platform capable of:
 ## Key Takeaways
 
 This project provided hands-on experience deploying a production-style web application within a Windows Server environment. It strengthened skills in IIS administration, PHP configuration, MySQL management, troubleshooting complex application errors, and integrating multiple technologies to deliver a working business application.
+
+---
+
+## Internal DNS and IIS Host Header Configuration
+
+### Overview
+
+After successfully deploying osTicket, the next objective was to improve accessibility by replacing the default application path (`http://localhost/osTicket`) with a user-friendly internal URL.
+
+To accomplish this, an internal DNS record was created within the Active Directory environment and IIS was configured with a dedicated website and host header binding. This allowed users to access the help desk platform using a simple, memorable address.
+
+Final URL:
+
+```text
+http://helpdesk.woodtech.com
+```
+
+---
+
+### Objectives
+
+- Create an internal DNS record for the help desk platform
+- Configure IIS host header bindings
+- Create a dedicated IIS website for osTicket
+- Eliminate the need for `/osTicket` in the URL
+- Simulate a real-world enterprise application deployment
+
+---
+
+### Technologies Used
+
+- Windows Server 2022
+- Active Directory DNS
+- Internet Information Services (IIS)
+- osTicket v1.17.7
+
+---
+
+### Implementation Details
+
+#### DNS Configuration
+
+A new **Host (A) record** was created within the `woodtech.com` forward lookup zone.
+
+| Record Name | IP Address |
+|-------------|------------|
+| `helpdesk` | `192.168.10.10` |
+
+This allowed domain-joined machines to resolve:
+
+```text
+helpdesk.woodtech.com
+```
+
+to the osTicket server.
+
+#### IIS Configuration
+
+A dedicated IIS website named **HelpDesk** was created with the following settings:
+
+| Setting | Value |
+|----------|-------|
+| Site Name | `HelpDesk` |
+| Physical Path | `C:\inetpub\wwwroot\osTicket` |
+| Type | `http` |
+| Port | `80` |
+| Host Name | `helpdesk.woodtech.com` |
+
+The existing osTicket application was removed from the **Default Web Site** after successful testing.
+
+---
+
+### Validation
+
+The configuration was verified by accessing the following URLs from a client workstation:
+
+```text
+http://helpdesk.woodtech.com
+```
+
+```text
+http://helpdesk.woodtech.com/scp
+```
+
+Successful access confirmed:
+
+- Proper DNS resolution
+- Correct IIS host header configuration
+- Functional osTicket deployment
+- Client-to-server connectivity
+
+---
+
+### Skills Demonstrated
+
+- DNS administration
+- IIS website configuration
+- Host header bindings
+- Internal web application deployment
+- Active Directory integration
+- Network troubleshooting
+
+---
+
+### Screenshots
+
+#### DNS Host Record
+
+<img width="1684" height="1018" alt="ServerDNS" src="https://github.com/user-attachments/assets/3b07c884-b872-4445-a0f5-ab0a82a6a09e" />
+
+*Created an internal DNS record to resolve `helpdesk.woodtech.com` to the osTicket server.*
+
+#### IIS Website Configuration and Validation
+
+<img width="1684" height="1018" alt="ServerDNS" src="https://github.com/user-attachments/assets/560fcd7d-e058-42c0-ad1b-7d88f8fb73c0" />
+
+*Configured a dedicated IIS website named **HelpDesk** with a host header binding for `helpdesk.woodtech.com` and verified successful access to the osTicket Support Center from a client workstation.*
+
+---
+
+### Outcome
+
+By implementing internal DNS and IIS host header bindings, the osTicket deployment now mirrors a production-style enterprise environment. Users can access the help desk platform through a simplified URL without requiring knowledge of server names, IP addresses, or application paths.
+
+---
