@@ -19,11 +19,11 @@ This phase of the project focused on simplifying access to the osTicket platform
 * Expand:
 
   * Forward Lookup Zones
-  * `woodtech.local`
+  * `woodtech.com`
 
 * Right click:
 
-  * `woodtech.local`
+  * `woodtech.com`
 
 * Select:
 
@@ -44,7 +44,7 @@ This phase of the project focused on simplifying access to the osTicket platform
 
 * Verify:
 
-  * `helpdesk.woodtech.local` appears within the `woodtech.local` zone
+  * `helpdesk.woodtech.com` appears within the `woodtech.com` zone
 
 ---
 
@@ -59,7 +59,7 @@ This phase of the project focused on simplifying access to the osTicket platform
 * Run:
 
 ```powershell id="u4mjlwm"
-ping helpdesk.woodtech.local
+ping helpdesk.woodtech.com
 ```
 
 * Verify:
@@ -95,7 +95,7 @@ ping helpdesk.woodtech.local
   * Type: `http`
   * IP Address: `All Unassigned`
   * Port: `80`
-  * Host Name: `helpdesk.woodtech.local`
+  * Host Name: `helpdesk.woodtech.com`
 
 * Select:
 
@@ -135,7 +135,7 @@ ping helpdesk.woodtech.local
 
 * Configure:
 
-  * Host Name: `ca-dc-01.woodtech.local`
+  * Host Name: `ca-dc-01.woodtech.com`
 
 * Select:
 
@@ -158,7 +158,7 @@ ping helpdesk.woodtech.local
 * Navigate to:
 
 ```text
-http://helpdesk.woodtech.local
+http://helpdesk.woodtech.com
 ```
 
 * Verify:
@@ -168,7 +168,7 @@ http://helpdesk.woodtech.local
 * Navigate to:
 
 ```text
-http://helpdesk.woodtech.local/scp
+http://helpdesk.woodtech.com/scp
 ```
 
 * Verify:
