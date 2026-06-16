@@ -19,7 +19,7 @@ This repository will continue to expand with additional help desk scenarios, tro
 
 ---
 
-# Active Directory Management
+# 1. Active Directory Management
 This phase of the project focused on organizing Active Directory to simulate a real-world enterprise environment. Organizational Units (OUs), users, security groups, and workstation objects were structured to support future onboarding, offboarding, access management, and help desk workflows.
 
 Tom Assigned to Sales Department
@@ -53,7 +53,7 @@ Skills Demonstrated:
 - Enterprise Directory Structure Design
 
 ---
-# osTicket Deployment Lab
+# 2. osTicket Deployment Lab
 
 ## Overview
 
@@ -197,7 +197,7 @@ This project provided hands-on experience deploying a production-style web appli
 
 ---
 
-## Internal DNS and IIS Host Header Configuration
+## 3. Internal DNS and IIS Host Header Configuration
 
 ### Overview
 
